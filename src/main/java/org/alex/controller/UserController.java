@@ -34,14 +34,13 @@ public class UserController {
     }
 
 
-
     @GetMapping("/update/{id}")
     public String updateUser(@PathVariable Long id,Model model){
      model.addAttribute("user",userService.findById(id));
      return "userdetail";
     }
 
-    @PostMapping("/updateuser")
+    @PatchMapping("/updateuser")
     public String update(@ModelAttribute User user){
         userService.update(user);
         return "redirect:/";

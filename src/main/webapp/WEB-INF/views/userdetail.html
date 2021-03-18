@@ -3,7 +3,7 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <body>
 <h1>Update</h1>
-<form action="#" th:action="@{/updateuser}" th:object="${user}" method="post">
+<form action="#" th:action="@{/updateuser}" th:object="${user}" method="post" th:method="patch">
     <input hidden type="number" th:field="*{id}" id="id">
     <label for="age">Age</label>
     <input type="number" th:field="*{age}" id="age" placeholder="Age">
