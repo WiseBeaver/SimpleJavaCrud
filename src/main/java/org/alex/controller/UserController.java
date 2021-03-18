@@ -23,7 +23,6 @@ public class UserController {
 
     @PostMapping("/adduser")
     public String saveUser(@ModelAttribute User user){
-        System.out.println(user);
         userService.save(user);
         return "redirect:/";
     }
@@ -33,6 +32,7 @@ public class UserController {
         userService.remove(id);
         return "redirect:/";
     }
+
 
 
     @GetMapping("/update/{id}")
