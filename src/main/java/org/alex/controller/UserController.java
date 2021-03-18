@@ -4,8 +4,10 @@ import org.alex.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.alex.service.UserService;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -22,7 +24,11 @@ public class UserController {
 
 
     @PostMapping("/adduser")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("users",userService.findAll());
+            return "user";
+        }
         userService.save(user);
         return "redirect:/";
     }
@@ -41,7 +47,10 @@ public class UserController {
     }
 
     @PatchMapping("/updateuser")
-    public String update(@ModelAttribute User user){
+    public String update(@Valid @ModelAttribute User user,BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "userdetail";
+        }
         userService.update(user);
         return "redirect:/";
     }
